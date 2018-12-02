@@ -23,7 +23,7 @@ pollutantmean<-function(directory, pollutant, id=1:332){
 
         mean2<-mean(massivedf[[pollutant]])  
         
-        return mean2
+        return(mean2)
      
 }
         
