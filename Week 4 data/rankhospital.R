@@ -28,7 +28,7 @@ rankhospital <- function(state, outcome, num) {
                 
         }
         
-        outcome<-"pneumonia"
+       
         
         outcome <- if (outcome == "heart attack"){
                 colnames(outcome_merged[8])
@@ -51,6 +51,8 @@ rankhospital <- function(state, outcome, num) {
                 select(State, hospital, outcome)
         
         outcome_perstate2 <- outcome_perstate2[order(outcome_perstate2[,3], outcome_perstate2$hospital),]
+        
+        
         
         outcome_perstate2 <- outcome_perstate2 %>%
                 mutate(rank_hosp= seq(1, countrows, 1))
