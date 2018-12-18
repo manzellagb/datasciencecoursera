@@ -11,7 +11,7 @@ rankall <- function(outcome, num = "best") {
         outcome_data<-outcome_raw[,1:9]
         outcome_merged<-cbind(outcome_data,outcome_interm)
         outcome_merged[,4:5]<-NULL
-        outcome_merged<-na.omit(outcome_merged)
+        
         colnames(outcome_merged)<-c("provider_number", "hospital", "adress",
                                     "city", "State", "zip_code", "county_name", "heart attack", 
                                     "heart failure", "pneumonia")
@@ -24,8 +24,8 @@ rankall <- function(outcome, num = "best") {
         #       stop("invalid outcome")
         #         
         #         }
-        
-     
+    
+        outcome<-"heart attack"
         outcome <- if (outcome == "heart attack"){
                 colnames(outcome_merged[8])
                 
@@ -43,13 +43,13 @@ rankall <- function(outcome, num = "best") {
                 select(State, hospital, outcome)
         
         outcome_perstate2<-as.data.frame(outcome_perstate2)
-        
-        outcome_perstate2 <- outcome_perstate2 %>% group_by(State)%>%
-                mutate(rank_hosp= seq(1, length(State), 1))
-        outcome_perstate2<-as.data.frame(outcome_perstate2)
         outcome_perstate2 <- outcome_perstate2[order(outcome_perstate2[,3], outcome_perstate2$hospital),]
         
-
+        outcome_perstate2 <- outcome_perstate2 %>% group_by(State)%>%
+                mutate(rank_hosp= seq(1, length(State), 1))%>%
+                arrange(State)
+        
+        num<-20
         
         num <- if (num=="best"){
                 min(outcome_perstate2$rank_hosp)
@@ -61,8 +61,19 @@ rankall <- function(outcome, num = "best") {
                 num
         }
         
-        answer<-subset(outcome_perstate2, rank_hosp==num)
-        answer[,3:4]<-NULL
+     outcome_new<-outcome_perstate2%>%
+        
+        for (i in 1:length(State)){
+                if (length(rank_hosp)< num){
+                        add_row(NA)                        
+                }
+                
+        }
+        
+        answer<-outcome_perstate2%>%filter(rank_hosp==num)%>%
+                
+                select(-outcome, -rank_hosp)
+        
         
         return(answer)
                
