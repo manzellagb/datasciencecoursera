@@ -61,11 +61,14 @@ rankall <- function(outcome, num = "best") {
                 num
         }
         
-     outcome_new<-outcome_perstate2%>%
-        
-        for (i in 1:length(State)){
-                if (length(rank_hosp)< num){
-                        add_row(NA)                        
+        outcome_perstate2<-as.data.frame(outcome_perstate2)
+     
+                
+        for (i in unique(outcome_perstate2$State)){
+                print("primeiro")
+                
+                if (length(outcome_perstate2$rank_hosp)< num){
+                      print("oi")
                 }
                 
         }
