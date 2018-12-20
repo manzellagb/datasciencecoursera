@@ -68,14 +68,15 @@ rankall <- function(outcome, num = "best") {
         for (i in unique(outcome_perstate2$State)){
                 
                 if (length(outcome_perstate2$State[outcome_perstate2$State==i])< num){
-                      outcome_perstate2<-add_row(outcome_perstate2, State=i, rank_hosp=NA, hospital=NA)
+                      outcome_perstate2<-add_row(outcome_perstate2, State=i, rank_hosp=NA, hospital=NA,
+                                                 after=which(tail(outcome_perstate2$State[outcome_perstate2$State==i], n=1)))
                         
                 }
                 
         }
+
         
-        
-        answer<-outcome_perstate2%>%group_by(State)%>%
+        answer<-outcome_perstate2%>%
                 filter(rank_hosp==num | is.na(hospital))%>%
                 
                 select(-outcome, -rank_hosp)
