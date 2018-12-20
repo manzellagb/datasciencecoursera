@@ -2,6 +2,7 @@ rankall <- function(outcome, num = "best") {
         
         library(dplyr)
         library(tidyr)
+        library(tibble)
         ## Read outcome data
         outcome_raw <- read.csv("outcome-of-care-measures.csv", header = TRUE,
                                 na.strings = "Not Available")
@@ -25,7 +26,7 @@ rankall <- function(outcome, num = "best") {
         #         
         #         }
     
-        outcome<-"heart attack"
+        
         outcome <- if (outcome == "heart attack"){
                 colnames(outcome_merged[8])
                 
@@ -49,7 +50,7 @@ rankall <- function(outcome, num = "best") {
                 mutate(rank_hosp= seq(1, length(State), 1))%>%
                 arrange(State)
         
-        num<-20
+   
         
         num <- if (num=="best"){
                 min(outcome_perstate2$rank_hosp)
@@ -61,19 +62,21 @@ rankall <- function(outcome, num = "best") {
                 num
         }
         
-        outcome_perstate2<-as.data.frame(outcome_perstate2)
+        outcome_perstate2<-as.data.frame(outcome_perstate2)%>%ungroup()
      
                 
         for (i in unique(outcome_perstate2$State)){
-                print("primeiro")
                 
-                if (length(outcome_perstate2$rank_hosp)< num){
-                      print("oi")
+                if (length(outcome_perstate2$State[outcome_perstate2$State==i])< num){
+                      outcome_perstate2<-add_row(outcome_perstate2, State=i, rank_hosp=NA, hospital=NA)
+                        
                 }
                 
         }
         
-        answer<-outcome_perstate2%>%filter(rank_hosp==num)%>%
+        
+        answer<-outcome_perstate2%>%group_by(State)%>%
+                filter(rank_hosp==num | is.na(hospital))%>%
                 
                 select(-outcome, -rank_hosp)
         
