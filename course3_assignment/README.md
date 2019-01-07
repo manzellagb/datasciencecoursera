@@ -1,4 +1,4 @@
-Codebook for run\_analysis.R
+Explanationof run\_analysis.R
 ============================
 
 Importing the data
