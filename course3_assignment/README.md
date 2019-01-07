@@ -1,4 +1,4 @@
-Explanationof run\_analysis.R
+Explanation of run\_analysis.R
 ============================
 
 Importing the data
