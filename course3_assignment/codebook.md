@@ -1,4 +1,4 @@
-# TThe observations are contained in the following files: 
+# The observations are contained in the following files: 
 
 X_train.txt
 X_test.txt 
@@ -20,13 +20,13 @@ y_test.txt
 
 # Features 
 ##### Features are the names of the columns in the datasets. In the final dataset we only want the ones which contain mean or std. 
-1 tBodyAcc-mean()-X
-2 tBodyAcc-mean()-Y
-3 tBodyAcc-mean()-Z
-4 tBodyAcc-std()-X
-5 tBodyAcc-std()-Y
-6 tBodyAcc-std()-Z
-7 tBodyAcc-mad()-X
+1 tBodyAcc-mean()-X \
+2 tBodyAcc-mean()-Y \
+3 tBodyAcc-mean()-Z \
+4 tBodyAcc-std()-X \
+5 tBodyAcc-std()-Y \
+6 tBodyAcc-std()-Z \
+7 tBodyAcc-mad()-X \
 8 tBodyAcc-mad()-Y
 9 tBodyAcc-mad()-Z
 10 tBodyAcc-max()-X
