@@ -5,10 +5,6 @@ date: "7th Jan 2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 #Codebook for run_analysis.R
 
 ##Importing the data
